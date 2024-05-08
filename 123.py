@@ -56,6 +56,12 @@ with orders_tab:
     else:
         final_filtered_orders = filtered_orders.copy()
 
+     # Visualization of profit by market
+    st.subheader('Market Profit')
+    market_profit = final_filtered_orders.groupby('Market', as_index=False)['Profit'].sum()
+    fig3 = px.bar(market_profit, x='Market', y='Profit')
+    st.plotly_chart(fig3)
+
     # Visualization of sales by sub-category
     st.subheader('Sub-Category Sales')
     sub_category_sales = final_filtered_orders.groupby('Sub-Category', as_index=False)['Sales'].sum()
@@ -67,11 +73,12 @@ with orders_tab:
     fig2 = px.box(final_filtered_orders, x='Ship Mode', y='Sales', height=400, width=600)
     st.plotly_chart(fig2)
 
-    # Visualization of profit by market
-    st.subheader('Market Profit')
-    market_profit = final_filtered_orders.groupby('Market', as_index=False)['Profit'].sum()
-    fig3 = px.bar(market_profit, x='Market', y='Profit')
-    st.plotly_chart(fig3)
+    # Pie chart to display sales distribution by segment
+    st.subheader('Sales Distribution by Segment')
+    fig5 = px.pie(final_filtered_orders, values="Sales", names='Segment')
+    st.plotly_chart(fig5)
+
+   
 
     # Scatter plot to show relationship between quantity and profit
     scatter = px.scatter(order_data, x='Quantity', y='Profit', size='Sales')
@@ -89,10 +96,7 @@ with orders_tab:
     fig4 = px.bar(monthly_sales, x="MonthYear", y="Sales", height=500, width=1500, labels={"Sales": "Amount"}, template="gridon")
     st.plotly_chart(fig4, use_container_width=True)
 
-    # Pie chart to display sales distribution by segment
-    st.subheader('Sales Distribution by Segment')
-    fig5 = px.pie(final_filtered_orders, values="Sales", names='Segment')
-    st.plotly_chart(fig5)
+    
 
 # Define the content for the 'Market Basket Analysis' tab
 with rules_tab:
