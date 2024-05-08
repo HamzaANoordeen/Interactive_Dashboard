@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 
 
 # Load the data from CSV files
-order_data = pd.read_csv(orders_cleaned.csv)
-assoc_rules = pd.read_csv(association_rules_results.csv)
+order_data = pd.read_csv('orders_cleaned.csv')
+assoc_rules = pd.read_csv('association_rules_results.csv')
 
 # Title of the dashboard
 st.title('Insightful Dashboard')
